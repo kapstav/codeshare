@@ -27,4 +27,10 @@ This is a postgreSQL table connected to DesktopConsumer.
 KapsTopic(1):
 This is a single topic both the consumers are consuming from and producers are writing to.
 
-<img src=""></img>
+Screenshots:
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig1.jpg"></img>
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig2.jpg"></img>
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig3.jpg"></img>
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig4.jpg"></img>
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig5.jpg"></img>
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig6.jpg"></img>
