@@ -3,7 +3,7 @@ The project would demo Aiven kafka elements deployment using standard python lib
 
 Console Applications are created for producing and consuming the data streams.
 
-The producers are simulated to be in San Diego and San Jose and source of generation is either Mobile App or Web App. A single topic is serving every traffic here. Both the producer and consumer are adding their own tags to identify the source and destination of the data.
+The producers are simulated to be in San Diego and San Jose and consumption end point is either Mobile App or Web App. A single topic is serving every traffic here. Both the producer and consumer are adding their own tags to identify the source and destination of the data.
 
 Kafka Producer(2):
 Will generate arbitrary data for website visits and most searched phrases. Python Random function will be used here.
