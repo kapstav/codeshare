@@ -1,0 +1,54 @@
+-- Table: public.CellPhoneWebSearches
+
+-- DROP TABLE public."CellPhoneWebSearches";
+
+CREATE TABLE public."CellPhoneWebSearches"
+(
+    "GUID" uuid,
+    "WEBPAGEID" character varying(24) COLLATE pg_catalog."default",
+    "TOTALHITS" bigint,
+    "MOSTSEARCHED" character varying(16) COLLATE pg_catalog."default",
+    "CRTDT" timestamp without time zone,
+    "SRCREGION" character varying(16) COLLATE pg_catalog."default",
+    "CONSUMER" character varying(16) COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."CellPhoneWebSearches"
+    OWNER to avnadmin;
+
+COMMENT ON TABLE public."CellPhoneWebSearches"
+    IS 'GUID, WEBPAGEID, TOTALHITS, MOSTSEARCHED,CRTDT';
+
+COMMENT ON COLUMN public."CellPhoneWebSearches"."SRCREGION"
+    IS 'Source Region';
+
+-- >
+
+
+-- Table: public.DesktopWebSearches
+
+-- DROP TABLE public."DesktopWebSearches";
+
+CREATE TABLE public."DesktopWebSearches"
+(
+    "GUID" uuid,
+    "WEBPAGEID" character varying(24) COLLATE pg_catalog."default",
+    "TOTALHITS" bigint,
+    "MOSTSEARCHED" character varying(16) COLLATE pg_catalog."default",
+    "CRTDT" timestamp without time zone,
+    "SRCREGION" character varying(16) COLLATE pg_catalog."default",
+    "CONSUMER" character varying(16) COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."DesktopWebSearches"
+    OWNER to avnadmin;
+
+COMMENT ON TABLE public."DesktopWebSearches"
+    IS 'GUID, WEBPAGEID, TOTALHITS, MOSTSEARCHED,CRTDT';
+
+COMMENT ON COLUMN public."DesktopWebSearches"."SRCREGION"
+    IS 'Source Region';
