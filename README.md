@@ -1,9 +1,9 @@
 # codeshare
 The project would demo Aiven kafka elements deployment using standard python libraries to populate postgresql with browser stats from the wild. 
 
-Console Applications are created for producing and consuming the data streams.
+Windows Console Applications are created in this project for producing and consuming the data streams. Producer and consumer needs to be run concurrently or consumer can run later, the offset of last read is maintained. Both have to share the same topic.
 
-The producers are simulated to be in San Diego and San Jose and consumption end point is either Mobile App or Web App. A single topic is serving every traffic here. Both the producer and consumer are adding their own tags to identify the source and destination of the data.
+The producers are simulated to be in San Diego and San Jose and consumers are attached to either Mobile App Group or Web App Group. A single topic is serving every traffic here although both the producer and consumer are adding their own tags to identify the source and destination for the dataset.
 
 Kafka Producer(2):
 Will generate arbitrary data for website visits and most searched phrases. Python Random function will be used here.
@@ -26,3 +26,5 @@ This is a postgreSQL table connected to DesktopConsumer.
 
 KapsTopic(1):
 This is a single topic both the consumers are consuming from and producers are writing to.
+
+<img src=""></img>
