@@ -1,2 +1,2 @@
 # codeshare
-Some demo share
+The project would demo kafka python elements coupled to postgresql
