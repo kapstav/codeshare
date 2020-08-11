@@ -1,7 +1,7 @@
 # codeshare
 The project would demo Aiven kafka elements deployment using standard python libraries to populate postgresql with browser stats from the wild. 
 
-Console Applications are created for producing and consuming the data streams.
+Windows Console Applications are created in this project for producing and consuming the data streams. Producer and consumer needs to be run concurrently or consumer can run later, the offset of last read is maintained. Both have to share the same topic.
 
 The producers are simulated to be in San Diego and San Jose and consumption end point is either Mobile App or Web App. A single topic is serving every traffic here. Both the producer and consumer are adding their own tags to identify the source and destination of the data.
 
