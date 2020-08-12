@@ -139,17 +139,12 @@ end; $$
  
 
 <h3>Screenshots:</h3>
-<h4>First Producer run</h4>
+<h4>Sample Producer run</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig1.jpg"></img>
-<h4>Second Producer run</h4>
-<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig2.jpg"></img>
-<h4>First Consumer run</h4>
+<h4>Sample Consumer run</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig3.jpg"></img>
-<h4>Second Consumer run</h4>
-<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig4.jpg"></img>
-<h4>Testrig run</h4>
+<h4>Sample Testrig run</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig41.jpg"></img>
-<h4>PostgreSQL Snapshot 1</h4>
+<h4>Sample PostgreSQL Snapshot</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig5.jpg"></img>
-<h4>PostgreSQL Snapshot 2</h4>
-<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig6.jpg"></img>
+ 
