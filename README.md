@@ -44,7 +44,7 @@ py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert"
 <h3>DesktopWebSearches(1): </h3>
  <br/>This is a postgreSQL table connected to DesktopConsumer.
 <h3>crtWebSearches(1): </h3>
- <br/>This is a postgreSQL stored procedure invoked my consumers.
+ <br/>This is a postgreSQL stored procedure invoked by consumers.
 
 <h3>KapsTopic(1): </h3>
  <br/>This is a single topic both the consumers are consuming from and producers are writing to.
