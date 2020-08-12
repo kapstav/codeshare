@@ -25,6 +25,88 @@ py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert"
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="xxxxx-yyyyy-dd99.aivencloud.com:nnnnn" --testrig
    <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the above path appropriately. Replace the appropriate URI in the service uri parameter too.
    <h4>Database integration:</h4> Subscribe for PostgreSQL at Aivent console. This will generate a connection endpoint (ServiceURI) to be used for database crud operations in the defaultdb database. Leave most of the setting parameters for the exercise as default. You should also install some client like PGAdmin 4 to visualize the database query results. <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig11.jpg"></img>
+   <br/> Run the following command in a fresh PostgreSQL window which has defaultdb created in public schema, seek help of a db developer if in confusion.
+   <pre>
+   -- Table: public.CellPhoneWebSearches
+
+-- DROP TABLE public."CellPhoneWebSearches";
+
+CREATE TABLE public."CellPhoneWebSearches"
+(
+    "GUID" uuid,
+    "WEBPAGEID" character varying(24) COLLATE pg_catalog."default",
+    "TOTALHITS" bigint,
+    "MOSTSEARCHED" character varying(16) COLLATE pg_catalog."default",
+    "CRTDT" timestamp without time zone,
+    "SRCREGION" character varying(16) COLLATE pg_catalog."default",
+    "CONSUMER" character varying(16) COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."CellPhoneWebSearches"
+    OWNER to avnadmin;
+
+COMMENT ON TABLE public."CellPhoneWebSearches"
+    IS 'GUID, WEBPAGEID, TOTALHITS, MOSTSEARCHED,CRTDT';
+
+COMMENT ON COLUMN public."CellPhoneWebSearches"."SRCREGION"
+    IS 'Source Region';
+	
+;
+	
+	
+-- Table: public.DesktopWebSearches
+
+-- DROP TABLE public."DesktopWebSearches";
+
+CREATE TABLE public."DesktopWebSearches"
+(
+    "GUID" uuid,
+    "WEBPAGEID" character varying(24) COLLATE pg_catalog."default",
+    "TOTALHITS" bigint,
+    "MOSTSEARCHED" character varying(16) COLLATE pg_catalog."default",
+    "CRTDT" timestamp without time zone,
+    "SRCREGION" character varying(16) COLLATE pg_catalog."default",
+    "CONSUMER" character varying(16) COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public."DesktopWebSearches"
+    OWNER to avnadmin;
+
+COMMENT ON TABLE public."DesktopWebSearches"
+    IS 'GUID, WEBPAGEID, TOTALHITS, MOSTSEARCHED,CRTDT';
+
+COMMENT ON COLUMN public."DesktopWebSearches"."SRCREGION"
+    IS 'Source Region';
+
+
+;
+
+create or replace procedure crtWebSearches(xGUID varchar(24),xWEBPAGEID varchar(16), xTOTALHITS varchar(4), xMOSTSEARCHED varchar(16)
+,xCRTDT varchar(24),xSRCREGION varchar(16), xCONSUMER varchar(16))
+language plpgsql
+as $$
+declare
+begin
+	IF xCONSUMER ='Web' THEN
+	 IF NOT EXISTS (SELECT * FROM "DesktopWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
+			INSERT INTO "DesktopWebSearches"("GUID","WEBPAGEID","TOTALHITS","MOSTSEARCHED","CRTDT","SRCREGION","CONSUMER")
+			VALUES(UUID(xGUID),xWEBPAGEID, CAST(xTOTALHITS as bigint), xMOSTSEARCHED,CAST(xCRTDT as timestamp),xSRCREGION, xCONSUMER);
+     END IF;
+	ELSE
+	 IF NOT EXISTS (SELECT * FROM "CellPhoneWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
+			INSERT INTO "CellPhoneWebSearches"("GUID","WEBPAGEID","TOTALHITS","MOSTSEARCHED","CRTDT","SRCREGION","CONSUMER")
+			VALUES(UUID(xGUID),xWEBPAGEID, CAST(xTOTALHITS as bigint), xMOSTSEARCHED,CAST(xCRTDT as timestamp),xSRCREGION, xCONSUMER);
+     END IF;
+
+	END IF;
+end; $$
+
+;
+</pre>
   <hr/>
   <h2>Component Details</h2>
   <br/>The project would demo Aiven kafka elements deployment using standard python libraries to populate postgresql with browser stats from the wild. 
@@ -57,9 +139,17 @@ py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert"
  
 
 <h3>Screenshots:</h3>
+<h4>First Producer run</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig1.jpg"></img>
+<h4>Second Producer run</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig2.jpg"></img>
+<h4>First Consumer run</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig3.jpg"></img>
+<h4>Second Consumer run</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig4.jpg"></img>
+<h4>Testrig run</h4>
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig41.jpg"></img>
+<h4>PostgreSQL Snapshot 1</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig5.jpg"></img>
+<h4>PostgreSQL Snapshot 2</h4>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig6.jpg"></img>
