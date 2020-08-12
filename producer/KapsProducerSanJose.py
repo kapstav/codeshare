@@ -1,44 +1,38 @@
+import argparse
 import datetime
 import random
 import uuid
+import os
+import sys 
 from pykafka import KafkaClient, SslConfig
 
+def KapsProducerSanJose(service_uri, ca_path, cert_path, key_path):
+    #configuration object for pykafka connection. Refer Aiven Console for these immutable access files per account 
+    config = SslConfig(cafile=ca_path,certfile=cert_path,keyfile=key_path)   
 
-#configuration object for pykafka connection. Refer Aiven Console for these immutable access files per account 
-config = SslConfig(cafile='ca.pem',
-                   certfile='service.cert', 
-                   keyfile='service.key')   
+    #creating kafka client with Aiven kafka uri
+    client = KafkaClient(hosts=service_uri,ssl_config=config);
+    #print(client.topics);
 
-#creating kafka client with Aiven kafka uri
-client = KafkaClient(hosts="kapskafka-kapstav-dd56.aivencloud.com:18514",ssl_config=config);
-#print(client.topics);
 
-#creating a topic named KapsTopic
-topic = client.topics[b"KapsTopic"]
+    #creating a topic named KapsTopic
+    topic = client.topics[b"KapsTopic"]
 
-print ("~~~~~~~~~~~~~~~Producer SJ Started~~~~~~~~~~~~~~~~");
+    print ("~~~~~~~~~~~~~~~Producer SJ Started~~~~~~~~~~~~~~~~");
 
-#random search string collection
-Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
- 
-#creating a synchronus producer by pykafka library. 
-with topic.get_sync_producer() as producer:
-     for i in range(5):
-	 #generating 5 rows of randomized data with San Jose as tag
-         msg = str(uuid.uuid4()).encode() + str("|").encode() \
-	 + b'WebPage' +  str(random.randint(1,20)).encode() \
-	 + str("|").encode()+str(random.randint(600,1200)).encode() \
-	 + str("|").encode() +str(random.choice(Search_keywords)).encode() \
-	 + str("|").encode() +str(datetime.datetime.now()).encode() \
-	 + str("|").encode() +b'San Jose'
-         #msg=str("'").encode() \
-	#+ str(uuid.uuid4()).encode() + str("\',\'").encode() \
-	#+ b'WebPage' +  str(random.randint(1,20)).encode() \
-	#+ str("\',").encode()+str(random.randint(600,1200)).encode() \
-	#+ str(",'").encode() +str(random.choice(Search_keywords)).encode() \
-	#+ str("\',\'").encode() +str(datetime.datetime.now()).encode() \
-	#+ str("\',\'").encode() +b'San Jose' + str("\'").encode()
-         print(msg)
-         producer.produce(msg)
-print ("~~~~~~~~~~~~~~~Producer SJ Finished~~~~~~~~~~~~~~~~");
+    #random search string collection
+    Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
 
+    #creating a synchronus producer by pykafka library.
+    with topic.get_sync_producer() as producer:
+         for i in range(5):
+         #generating 5 rows of randomized data with San Jose as tag
+             msg = str(uuid.uuid4()).encode() + str("|").encode() \
+             + b'WebPage' +  str(random.randint(1,20)).encode() \
+             + str("|").encode()+str(random.randint(600,1200)).encode() \
+             + str("|").encode() +str(random.choice(Search_keywords)).encode() \
+             + str("|").encode() +str(datetime.datetime.now()).encode() \
+             + str("|").encode() +b'San Jose'
+             print(msg)
+             producer.produce(msg)
+    print ("~~~~~~~~~~~~~~~Producer SJ Finished~~~~~~~~~~~~~~~~");
