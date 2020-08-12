@@ -10,14 +10,14 @@ Note: You can find the connection details in the "Overview" tab in the Aiven Con
 <h3>Use the Aiven Client to create a topic in your Kafka cluster:</h3>
 avn service topic-create <kafka-service-name>  KapsTopic --partitions 3 --replication 1
 <h3>Produce some messages:</h3>
-py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="kapskafka-kapstav-dd56.aivencloud.com:18514" --producer
-  <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="xxxxx-yyyyy-dd99.aivencloud.com:nnnnn" --producer
+  <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately.Replace the appropriate URI in the service uri parameter after querying Aiven console
 <h3>Consume some messages:</h3>
-py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="kapskafka-kapstav-dd56.aivencloud.com:18514" --consumer
-   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately
-<h3>Consume some messages:</h3>
-py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="kapskafka-kapstav-dd56.aivencloud.com:18514" --testrig
-   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="xxxxx-yyyyy-dd99.aivencloud.com:nnnnn" --consumer
+   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately.Replace the appropriate URI in the service uri parameter after querying Aiven console
+<h3>Test some messages:</h3>
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="xxxxx-yyyyy-dd99.aivencloud.com:nnnnn" --testrig
+   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the above path appropriately. Replace the appropriate URI in the service uri parameter after querying Aiven console
   <hr/>
   <br/>The project would demo Aiven kafka elements deployment using standard python libraries to populate postgresql with browser stats from the wild. 
 
