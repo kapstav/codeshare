@@ -3,10 +3,10 @@
 This example uses the pyKafka library to interact with Kafka both as a producer of messages and a consumer.
 
 <h3>Installing Dependencies</h3>
-pip install PyKafka
-pip install psycopg2
+   <br/>pip install PyKafka
+   <br/>pip install psycopg2
 
-The binaries for these is included in the bin folder if your environment can't access them.
+   <br/>The binaries for these is included in the bin folder if your environment can't access them.
 <h3>Running The Example</h3>
 Note: You can find the connection details in the "Overview" tab in the Aiven Console. 
 
