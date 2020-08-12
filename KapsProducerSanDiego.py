@@ -5,21 +5,28 @@ import uuid
 import os
 import sys 
 from pykafka import KafkaClient, SslConfig
+from configparser import ConfigParser
 
 def KapsProducerSanDiego(service_uri, ca_path, cert_path, key_path):
+
+    # from ConfigParser import ConfigParser  
+    config_file = 'config.ini'
+ 
+    configP = ConfigParser()
+    configP.read(config_file)
+    
     #configuration object for pykafka connection. Refer Aiven Console for these immutable access files per account 
-    config = SslConfig(cafile=ca_path,certfile=cert_path,keyfile=key_path)   
+    configS = SslConfig(cafile=ca_path,certfile=cert_path,keyfile=key_path)   
 
     #creating kafka client with Aiven kafka uri
-    client = KafkaClient(hosts=service_uri,ssl_config=config);
-    #print(client.topics);
-
+    client = KafkaClient(hosts=service_uri,ssl_config=configS);
 
     #random search string collection
     Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
     
-    #creating a topic named KapsTopic
-    topic = client.topics[b"KapsTopic"]
+     #retrieving the topic name from config file viz., KapsTopic
+    topictxt=configP['kafka']['topic']
+    topic = client.topics[str(topictxt).encode()]   
 
     print ("~~~~~~~~~~~~~~~Producer SD Started~~~~~~~~~~~~~~~~");
 
