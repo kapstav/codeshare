@@ -54,9 +54,7 @@ py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert"
 <h3>crtWebSearches(1): </h3>
  <br/>This is a postgreSQL stored procedure invoked by consumers.
 
-<h3>KapsTopic(1): </h3>
- <br/>This is a single topic both the consumers are consuming from and producers are writing to.
-<hr/>
+ 
 
 <h3>Screenshots:</h3>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig1.jpg"></img>
