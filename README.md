@@ -3,7 +3,7 @@
 This example uses the pyKafka library to interact with Kafka both as a producer of messages and a consumer.
 
 <h3>Installing Dependencies</h3>
-   <br/>pip install PyKafka
+        pip install PyKafka
    <br/>pip install psycopg2
 
    <br/>The binaries for these is included in the bin folder if your environment can't access them.
