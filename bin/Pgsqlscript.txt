@@ -61,25 +61,16 @@ create or replace procedure crtWebSearches(xGUID varchar(24),xWEBPAGEID varchar(
 language plpgsql
 as $$
 declare
-cnt int=0;
--- variable declaration
 begin
--- stored procedure body
 	IF xCONSUMER ='Web' THEN
-	 IF EXISTS (SELECT * FROM "DesktopWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
-      --RETURN FALSE;
-      ELSE
+	 IF NOT EXISTS (SELECT * FROM "DesktopWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
 			INSERT INTO "DesktopWebSearches"("GUID","WEBPAGEID","TOTALHITS","MOSTSEARCHED","CRTDT","SRCREGION","CONSUMER")
 			VALUES(UUID(xGUID),xWEBPAGEID, CAST(xTOTALHITS as bigint), xMOSTSEARCHED,CAST(xCRTDT as timestamp),xSRCREGION, xCONSUMER);
-      --RETURN TRUE;
      END IF;
 	ELSE
-	 IF EXISTS (SELECT * FROM "CellPhoneWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
-      --RETURN FALSE;
-      ELSE
+	 IF NOT EXISTS (SELECT * FROM "CellPhoneWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
 			INSERT INTO "CellPhoneWebSearches"("GUID","WEBPAGEID","TOTALHITS","MOSTSEARCHED","CRTDT","SRCREGION","CONSUMER")
 			VALUES(UUID(xGUID),xWEBPAGEID, CAST(xTOTALHITS as bigint), xMOSTSEARCHED,CAST(xCRTDT as timestamp),xSRCREGION, xCONSUMER);
-      --RETURN TRUE;
      END IF;
 
 	END IF;
