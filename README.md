@@ -11,13 +11,13 @@ Note: You can find the connection details in the "Overview" tab in the Aiven Con
 avn service topic-create <kafka-service-name>  KapsTopic --partitions 3 --replication 1
 <h3>Produce some messages:</h3>
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="xxxxx-yyyyy-dd99.aivencloud.com:nnnnn" --producer
-  <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately.Replace the appropriate URI in the service uri parameter after querying Aiven console
+  <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately. Replace the appropriate URI in the service uri parameter too.
 <h3>Consume some messages:</h3>
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="xxxxx-yyyyy-dd99.aivencloud.com:nnnnn" --consumer
-   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately.Replace the appropriate URI in the service uri parameter after querying Aiven console
+   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriatelyy. Replace the appropriate URI in the service uri parameter too.
 <h3>Test some messages:</h3>
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="xxxxx-yyyyy-dd99.aivencloud.com:nnnnn" --testrig
-   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the above path appropriately. Replace the appropriate URI in the service uri parameter after querying Aiven console
+   <br/>Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the above path appropriatelyy. Replace the appropriate URI in the service uri parameter too.
   <hr/>
   <br/>The project would demo Aiven kafka elements deployment using standard python libraries to populate postgresql with browser stats from the wild. 
 
