@@ -23,10 +23,10 @@ COMMENT ON TABLE public."CellPhoneWebSearches"
 
 COMMENT ON COLUMN public."CellPhoneWebSearches"."SRCREGION"
     IS 'Source Region';
-
--- >
-
-
+	
+;
+	
+	
 -- Table: public.DesktopWebSearches
 
 -- DROP TABLE public."DesktopWebSearches";
@@ -52,3 +52,42 @@ COMMENT ON TABLE public."DesktopWebSearches"
 
 COMMENT ON COLUMN public."DesktopWebSearches"."SRCREGION"
     IS 'Source Region';
+
+
+;
+
+create or replace procedure crtWebSearches(xGUID varchar(24),xWEBPAGEID varchar(16), xTOTALHITS varchar(4), xMOSTSEARCHED varchar(16)
+,xCRTDT varchar(24),xSRCREGION varchar(16), xCONSUMER varchar(16))
+language plpgsql
+as $$
+declare
+cnt int=0;
+-- variable declaration
+begin
+-- stored procedure body
+	IF xCONSUMER ='Web' THEN
+	 IF EXISTS (SELECT * FROM "DesktopWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
+      --RETURN FALSE;
+      ELSE
+			INSERT INTO "DesktopWebSearches"("GUID","WEBPAGEID","TOTALHITS","MOSTSEARCHED","CRTDT","SRCREGION","CONSUMER")
+			VALUES(UUID(xGUID),xWEBPAGEID, CAST(xTOTALHITS as bigint), xMOSTSEARCHED,CAST(xCRTDT as timestamp),xSRCREGION, xCONSUMER);
+      --RETURN TRUE;
+     END IF;
+	ELSE
+	 IF EXISTS (SELECT * FROM "CellPhoneWebSearches" WHERE "GUID" = UUID(xGUID)) THEN
+      --RETURN FALSE;
+      ELSE
+			INSERT INTO "CellPhoneWebSearches"("GUID","WEBPAGEID","TOTALHITS","MOSTSEARCHED","CRTDT","SRCREGION","CONSUMER")
+			VALUES(UUID(xGUID),xWEBPAGEID, CAST(xTOTALHITS as bigint), xMOSTSEARCHED,CAST(xCRTDT as timestamp),xSRCREGION, xCONSUMER);
+      --RETURN TRUE;
+     END IF;
+
+	END IF;
+end; $$
+
+;
+
+SELECT * FROM public."DesktopWebSearches";
+
+
+SELECT * FROM public."CellPhoneWebSearches";
