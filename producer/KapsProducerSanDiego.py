@@ -24,13 +24,20 @@ Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxf
 #creating a synchronus producer by pykafka library.
 with topic.get_sync_producer() as producer:
      for i in range(5):
-         msg=str("'").encode() \
-	+ str(uuid.uuid4()).encode() + str("\',\'").encode() \
-	+ b'WebPage' +  str(random.randint(1,20)).encode() \
-	+ str("\',").encode()+str(random.randint(600,1200)).encode() \
-	+ str(",'").encode() +str(random.choice(Search_keywords)).encode() \
-	+ str("\',\'").encode() +str(datetime.datetime.now()).encode() \
-	+ str("\',\'").encode() +b'San Diego' + str("\'").encode()
+	 #generating 5 rows of randomized data with San Jose as tag
+         msg = str(uuid.uuid4()).encode() + str("|").encode() \
+	 + b'WebPage' +  str(random.randint(1,20)).encode() \
+	 + str("|").encode()+str(random.randint(600,1200)).encode() \
+	 + str("|").encode() +str(random.choice(Search_keywords)).encode() \
+	 + str("|").encode() +str(datetime.datetime.now()).encode() \
+	 + str("|").encode() +b'San Diego'
+         #msg=str("'").encode() \
+	#+ str(uuid.uuid4()).encode() + str("\',\'").encode() \
+	#+ b'WebPage' +  str(random.randint(1,20)).encode() \
+	#+ str("\',").encode()+str(random.randint(600,1200)).encode() \
+	#+ str(",'").encode() +str(random.choice(Search_keywords)).encode() \
+	#+ str("\',\'").encode() +str(datetime.datetime.now()).encode() \
+	#+ str("\',\'").encode() +b'San Diego' + str("\'").encode()
          print(msg)
          producer.produce(msg)
 print ("~~~~~~~~~~~~~~~Producer SD Finished~~~~~~~~~~~~~~~~");

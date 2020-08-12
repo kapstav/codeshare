@@ -30,12 +30,16 @@ for message in consumer:
     if message is not None:
 
         #print(" [key=%18s, id=%5s, offset=%2s]" % (message.value, message.partition_key, message.offset));
-
-        sqlstmt=("INSERT INTO public.\"CellPhoneWebSearches\" VALUES("+ str(message.value).replace("b\"","").replace("\"","")+",'Mobile'" +")")
-        print(sqlstmt)
-
-	#executing the embeded sql
-        c.execute(sqlstmt)
+        messageval = str(message.value).replace("b\'","").replace("\"","").replace(",","|").replace("'","")
+        print(messageval)
+        xGUID = messageval.split("|")[0]
+        xWEBPAGEID = messageval.split("|")[1]
+        xTOTALHITS = messageval.split("|")[2]
+        xMOSTSEARCHED = messageval.split("|")[3]
+        xCRTDT = messageval.split("|")[4]
+        xSRCREGION = messageval.split("|")[5]
+         
+        c.execute("CALL crtWebSearches(%s, %s, %s, %s, %s, %s, %s);", (xGUID,xWEBPAGEID, xTOTALHITS, xMOSTSEARCHED,xCRTDT,xSRCREGION, 'Mobile'))
 
 	#committing the crud operation
         db_conn.commit() 
@@ -45,4 +49,5 @@ c.close()
 
 #Close the connection
 db_conn.close()
+
 
