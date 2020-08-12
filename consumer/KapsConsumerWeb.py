@@ -24,7 +24,7 @@ client = KafkaClient(hosts="kapskafka-kapstav-dd56.aivencloud.com:18514",ssl_con
 #creating a topic named KapsTopic
 topic = client.topics[b"KapsTopic"]
  
-#creating a simple consumer by pykafka. Balanced kafka needs Zookeeper signature which is deprecated in Aiven Interface
+#creating a Simple consumer by pykafka. Balanced consumer needs Zookeeper signature which is deprecated in Aiven Interface
 consumer = topic.get_simple_consumer(consumer_group=b"Web",auto_commit_enable=True)
 for message in consumer:
     if message is not None:
