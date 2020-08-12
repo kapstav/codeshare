@@ -26,8 +26,27 @@ This is a postgreSQL table connected to DesktopConsumer.
 
 KapsTopic(1):
 This is a single topic both the consumers are consuming from and producers are writing to.
+<hr/>
+<h3>Kafka Python Example
+This example uses the kafka-python library to interact with Kafka both as a producer of messages and a consumer.
 
-Screenshots:
+<h3>Installing Dependencies</h3>
+pip install PyKafka
+<h3>Running The Example</h3>
+Note: You can find the connection details in the "Overview" tab in the Aiven Console. 
+
+<h3>Use the Aiven Client to create a topic in your Kafka cluster:</h3>
+avn service topic-create <kafka-service-name>  KapsTopic --partitions 3 --replication 1
+<h3>Produce some messages:</h3>
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="kapskafka-kapstav-dd56.aivencloud.com:18514" --producer
+  Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately
+<h3>Consume some messages:</h3>
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="kapskafka-kapstav-dd56.aivencloud.com:18514" --consumer
+  Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately
+<h3>Consume some messages:</h3>
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --service-uri="kapskafka-kapstav-dd56.aivencloud.com:18514" --testrig
+  Download serice.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately
+<h3>Screenshots:</h3>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig1.jpg"></img>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig2.jpg"></img>
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig3.jpg"></img>
