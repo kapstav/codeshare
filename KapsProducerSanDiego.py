@@ -15,13 +15,14 @@ def KapsProducerSanDiego(service_uri, ca_path, cert_path, key_path):
     #print(client.topics);
 
 
+    #random search string collection
+    Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
+    
     #creating a topic named KapsTopic
     topic = client.topics[b"KapsTopic"]
 
     print ("~~~~~~~~~~~~~~~Producer SD Started~~~~~~~~~~~~~~~~");
 
-    #random search string collection
-    Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
 
     #creating a synchronus producer by pykafka library.
     with topic.get_sync_producer() as producer:

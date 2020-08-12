@@ -18,6 +18,10 @@ def KapsProducerSanJose(service_uri, ca_path, cert_path, key_path):
     #creating a topic named KapsTopic
     topic = client.topics[b"KapsTopic"]
 
+
+    #random search string collection
+    Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
+    
     print ("~~~~~~~~~~~~~~~Producer SJ Started~~~~~~~~~~~~~~~~");
 
     #random search string collection

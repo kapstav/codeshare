@@ -41,7 +41,7 @@ def KapsConsumerMobile(service_uri, ca_path, cert_path, key_path):
              
             c.execute("CALL crtWebSearches(%s, %s, %s, %s, %s, %s, %s);", (xGUID,xMobilePAGEID, xTOTALHITS, xMOSTSEARCHED,xCRTDT,xSRCREGION, 'Mobile'))
 
-        #committing the crud operation
+            #committing the crud operation
             db_conn.commit() 
 
     #Close the current cursor
