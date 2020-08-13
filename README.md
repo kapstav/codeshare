@@ -123,14 +123,14 @@ The kafka & pgsql endpoints, topic name and sample seed data are set in config.i
 The search strings are single quoted array of some current arbitrary search popular words. Note in testsearch there just one word allowed for now (Tesla). These words can be changed to anything in config.ini. These are randomly selected.
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig33.jpg"></img>
 <h4>Produce some messages:</h4>
-py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --producer
-  <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately. Replace the appropriate URI in the service uri parameter too.
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --db-cred="avnadmin:xxxxxxxxc99lcdc@" --producer 
+  <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately. Replace the appropriate URI in the service uri parameter too.Pass postgresql log & password for the URI provided by Aiven Console as colon (:) separated string.
 <h4>Consume some messages:</h4>
-py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --consumer
-   <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately. Replace the appropriate URI in the service uri parameter too.
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --db-cred="avnadmin:xxxxxxxxxc99lcdc@" --consumer
+   <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately. Replace the appropriate URI in the service uri parameter too.Pass postgresql log & password for the URI provided by Aiven Console as colon (:) separated string.
 <h4>Test some messages:</h4>
-py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --testrig
-   <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the above path appropriately. Replace the appropriate URI in the service uri parameter too.
+py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --db-cred="avnadmin:xxxxxxxxxxc99lcdc@" --testrig
+   <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the above path appropriately. Replace the appropriate URI in the service uri parameter too. Pass postgresql log & password for the URI provided by Aiven Console as colon (:) separated string.
 
 
   <hr/>
