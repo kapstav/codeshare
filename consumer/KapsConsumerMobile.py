@@ -8,7 +8,7 @@ from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBr
 import sys 
 
 def KapsConsumerMobile(ca_path, cert_path, key_path, db_cred):
-
+   
     # from ConfigParser import ConfigParser  
     config_file = 'config.ini'
  
@@ -30,7 +30,7 @@ def KapsConsumerMobile(ca_path, cert_path, key_path, db_cred):
     try:
         db_conn = psycopg2.connect(db_uri)
     except (psycopg2.OperationalError) as e:
-        print("-->Mobile Consumer::Unable to connect to a PostgreSQL Server. Check the service_uri value in config.ini<--");
+        print("-->Mobile Consumer::Unable to connect to a kafka broker, or the service is shutdown. Check the service_uri value in config.ini<--");
         sys.exit(1);
 
     #opening a cursor with dictionary objects as output

@@ -8,7 +8,7 @@ from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBr
 import sys 
 
 def KapsConsumerMobile(ca_path, cert_path, key_path, db_cred):
-    print("Kaps Consumer Called");
+   
     # from ConfigParser import ConfigParser  
     config_file = 'config.ini'
  
