@@ -17,7 +17,8 @@ Make sure you have downloaded the following binaries in the base local windows d
    <br/>pip install psycopg2
 
    <br/>The binaries for these is included in the bin folder if your environment can't access them.
-   <h4>Database integration:</h4> Subscribe for PostgreSQL at Aivent console. This will generate a connection endpoint (ServiceURI) to be used for database crud operations in the defaultdb database. Leave most of the setting parameters for the exercise as default. You should also install some client like PGAdmin 4 to visualize the database query results. <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig11.jpg"></img>
+   <h4>Database integration:</h4> Subscribe for PostgreSQL at Aivent console. This will generate a connection endpoint (ServiceURI) to be used for database crud operations in the defaultdb database. Leave most of the setting parameters for the exercise as default. You should also install some client like PGAdmin 4 to visualize the database query results. Connect to PGAdmin with the access snippets provided by Aiven console. <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig11.jpg"></img>
+   <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig55.jpg"></img>
    <br/> Run the following command in a fresh PostgreSQL window which has defaultdb created in public schema using any client of your choice, seek help of a db developer if in confusion.
    <pre>
    -- Table: public.CellPhoneWebSearches
