@@ -120,7 +120,7 @@ end; $$
 </pre>
 <h4>Setup Config.ini:</h4>
 The kafka & pgsql endpoints, topic name and sample seed data are set in config.ini. Open it and update appropriately with your subscriptions gotten from Aiven Console.
-
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig33.jpg"></img>
 <h4>Produce some messages:</h4>
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --producer
   <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately. Replace the appropriate URI in the service uri parameter too.
