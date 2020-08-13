@@ -7,7 +7,7 @@ import sys
 from pykafka import KafkaClient, SslConfig
 from configparser import ConfigParser
 
-def KapsProducerSanJose(service_uri, ca_path, cert_path, key_path):
+def KapsProducerSanJose(ca_path, cert_path, key_path, runmode="standard"):
 
     # from ConfigParser import ConfigParser  
     config_file = 'config.ini'
@@ -18,16 +18,21 @@ def KapsProducerSanJose(service_uri, ca_path, cert_path, key_path):
     #configuration object for pykafka connection. Refer Aiven Console for these immutable access files per account 
     configS = SslConfig(cafile=ca_path,certfile=cert_path,keyfile=key_path)   
 
+    #retrieving the service_uri name for kafka
+    service_uri=configP['kafka']['service_uri']  
+    
     #creating kafka client with Aiven kafka uri
     client = KafkaClient(hosts=service_uri,ssl_config=configS);
-    
+
     #random search string collection
-    Search_keywords = ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
+    if(runmode=="test"):    searchtxt=configP['testsearch']['sample']
+    else:   searchtxt=configP['search']['sample']
+    Search_keywords = eval('[' + searchtxt + ']') # e.g. - ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
     
-    #retrieving the topic name from config file viz., KapsTopic
+     #retrieving the topic name from config file viz., KapsTopic
     topictxt=configP['kafka']['topic']
     topic = client.topics[str(topictxt).encode()]   
-    
+
     print ("~~~~~~~~~~~~~~~Producer SJ Started~~~~~~~~~~~~~~~~");
 
 

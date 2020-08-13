@@ -4,7 +4,7 @@ import psycopg2
 from pykafka import KafkaClient, SslConfig
 from configparser import ConfigParser
 
-def KapsConsumerWeb(service_uri, ca_path, cert_path, key_path):
+def KapsConsumerWeb(ca_path, cert_path, key_path):
 
     # from ConfigParser import ConfigParser  
     config_file = 'config.ini'
@@ -12,10 +12,13 @@ def KapsConsumerWeb(service_uri, ca_path, cert_path, key_path):
     configP = ConfigParser()
     configP.read(config_file)
     
-    uri=configP['database']['postgresql_uri']
+    #retrieving the service_uri name for kafka
+    service_uri=configP['kafka']['service_uri']  
+    
+    db_uri=configP['database']['postgresql_uri']
 
     #connection string using psycopg2 library
-    db_conn = psycopg2.connect(uri)
+    db_conn = psycopg2.connect(db_uri)
 
     #opening a cursor with dictionary objects as output
     c = db_conn.cursor(cursor_factory=RealDictCursor)

@@ -10,8 +10,7 @@ from KapsProducerSanDiego import KapsProducerSanDiego
 from KapsProducerSanJose import KapsProducerSanJose
 from KapsConsumerWeb import KapsConsumerWeb
 from KapsConsumerMobile import KapsConsumerMobile
-from TestStreamSanDiego import TestStreamSanDiego
-from TestStreamSanJose import TestStreamSanJose
+from TestKafkatoDBStream import TestKafkatoDBStream
 
 def validate_args(args):
    for path_option in ("ca_path", "key_path", "cert_path"):
@@ -32,8 +31,7 @@ def fail(message):
 def runkafka():
 #parsing the commandline arguments   
     parser = argparse.ArgumentParser()
-    parser.add_argument('--service-uri', help="Service URI in the form host:port",
-                            required=True)
+
     parser.add_argument('--ca-path', help="Path to project CA certificate (obtained from Aiven Console, if in trial)",
                             required=True)
     parser.add_argument('--key-path', help="Path to the Kafka Access Key (obtained from Aiven Console)",
@@ -56,8 +54,7 @@ def runkafka():
         KapsConsumerWeb(**kwargs)
         KapsConsumerMobile(**kwargs)
     elif args.testrig:
-        TestStreamSanDiego(**kwargs)
-        TestStreamSanJose(**kwargs)
+        TestKafkatoDBStream(**kwargs)
 
    
 if __name__ == '__main__':
