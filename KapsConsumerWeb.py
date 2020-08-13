@@ -3,6 +3,7 @@ from psycopg2.extras import RealDictCursor
 import psycopg2
 from pykafka import KafkaClient, SslConfig
 from configparser import ConfigParser
+from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable
 
 def KapsConsumerWeb(ca_path, cert_path, key_path):
 
@@ -33,10 +34,15 @@ def KapsConsumerWeb(ca_path, cert_path, key_path):
     topictxt=configP['kafka']['topic']
     topic = client.topics[str(topictxt).encode()]  
     
-    print ("~~~~~~~~~~~~~~~Consumer Mobile Web Started~~~~~~~~~~~~~~~~");  
+    print ("~~~~~~~~~~~~~~~Consumer Desktop Web Started~~~~~~~~~~~~~~~~");  
     
     #creating a simple consumer by pykafka.  
     consumer = topic.get_simple_consumer(consumer_group=b"Web",auto_commit_enable=True,auto_commit_interval_ms=1000,consumer_timeout_ms=1000)
+    try:
+        consumer.consume() #Try consuming. If there is a network error, retry one more time automatically.
+    except (SocketDisconnectedError) as e:
+        consumer = topic.get_simple_consumer(consumer_group=b"Web",auto_commit_enable=True,auto_commit_interval_ms=1000,consumer_timeout_ms=1000)
+    
     for message in consumer:
         if message is not None:
 

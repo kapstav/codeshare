@@ -34,8 +34,6 @@ def KapsProducerSanJose(ca_path, cert_path, key_path, runmode="standard"):
     topic = client.topics[str(topictxt).encode()]   
 
     print ("~~~~~~~~~~~~~~~Producer SJ Started~~~~~~~~~~~~~~~~");
-
-
     #creating a synchronus producer by pykafka library.
     with topic.get_sync_producer() as producer:
          for i in range(5):
@@ -47,5 +45,9 @@ def KapsProducerSanJose(ca_path, cert_path, key_path, runmode="standard"):
              + str("|").encode() +str(datetime.datetime.now()).encode() \
              + str("|").encode() +b'San Jose'
              print(msg)
-             producer.produce(msg)
+             try:
+                producer.produce(msg)
+             except (SocketDisconnectedError, LeaderNotAvailable) as e:
+                producer = topic.get_sync_producer()
+                producer.produce(msg)
     print ("~~~~~~~~~~~~~~~Producer SJ Finished~~~~~~~~~~~~~~~~");
