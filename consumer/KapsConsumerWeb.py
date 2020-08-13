@@ -44,7 +44,7 @@ def KapsConsumerWeb(ca_path, cert_path, key_path, db_cred):
     try:
         client = KafkaClient(hosts=service_uri,ssl_config=configS);
     except(NoBrokersAvailableError) as e:
-        print("-->SanDiego Producer::Unable to connect to a kafka broker. Check the service_uri value in config.ini<--");
+        print("-->Web Consumer::Unable to connect to a kafka broker. Check the service_uri value in config.ini<--");
         sys.exit(1);
 
     #retrieving the topic name from config file viz., KapsTopic
