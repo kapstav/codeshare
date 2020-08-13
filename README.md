@@ -120,6 +120,7 @@ end; $$
 </pre>
 <h4>Setup Config.ini:</h4>
 The kafka & pgsql endpoints, topic name and sample seed data are set in config.ini. Open it and update appropriately with your subscriptions gotten from Aiven Console.
+The search strings are single quoted array of some current arbitrary search popular words. Note in testsearch there just one word allowed for now (Tesla). These words can be changed to anything in config.ini. These are randomly selected.
 <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig33.jpg"></img>
 <h4>Produce some messages:</h4>
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --producer
