@@ -1,3 +1,4 @@
+#invocation:py runkafka.py --key-path="./service.key" --cert-path="./service.cert" --ca-path="./ca.pem" --db-cred="avnadmin:mycaz65d9c99lcdc@" --producer
 import argparse
 import datetime
 import random
