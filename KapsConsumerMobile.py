@@ -4,7 +4,7 @@ from psycopg2 import OperationalError
 import psycopg2
 from pykafka import KafkaClient, SslConfig
 from configparser import ConfigParser
-from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBrokersAvailableError,ConsumerStoppedException, PartitionOwnedError
+from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBrokersAvailableError,ConsumerStoppedException, PartitionOwnedError, UnknownTopicOrPartition
 import sys 
 
 def KapsConsumerMobile(ca_path, cert_path, key_path):
@@ -40,9 +40,17 @@ def KapsConsumerMobile(ca_path, cert_path, key_path):
         print("-->SanDiego Producer::Unable to connect to a kafka broker. Check the service_uri value in config.ini<--");
         sys.exit(1);
 
-     #retrieving the topic name from config file viz., KapsTopic
-    topictxt=configP['kafka']['topic']
-    topic = client.topics[str(topictxt).encode()]  
+    #retrieving the topic name from config file viz., KapsTopic
+    try:
+        topictxt=configP['kafka']['topic']
+    except(KeyError) as e:
+        print("-->Mobile Consumer::topic text can not be read from config.ini<--");
+        sys.exit(1);
+    try:
+        topic = client.topics[str(topictxt).encode()]
+    except(UnknownTopicOrPartition) as e:
+        print("-->Mobile Consumer::this topic not found in the kafka ecosystem<--");
+        sys.exit(1);
     
     print ("~~~~~~~~~~~~~~~Consumer Mobile Web Started~~~~~~~~~~~~~~~~");
     

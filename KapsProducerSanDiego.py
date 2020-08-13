@@ -6,7 +6,7 @@ import os
 import sys 
 from pykafka import KafkaClient, SslConfig
 from configparser import ConfigParser
-from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBrokersAvailableError,ConsumerStoppedException, PartitionOwnedError
+from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBrokersAvailableError,ConsumerStoppedException, PartitionOwnedError, UnknownTopicOrPartition
 
 def KapsProducerSanDiego(ca_path, cert_path, key_path, runmode="standard"):
 
@@ -38,9 +38,17 @@ def KapsProducerSanDiego(ca_path, cert_path, key_path, runmode="standard"):
         print("-->SanDiego Producer::Unable to read appropriate section in config.ini<--");
         sys.exit(1);
         
-     #retrieving the topic name from config file viz., KapsTopic
-    topictxt=configP['kafka']['topic']
-    topic = client.topics[str(topictxt).encode()]   
+    #retrieving the topic name from config file viz., KapsTopic
+    try:
+        topictxt=configP['kafka']['topic']
+    except(KeyError) as e:
+        print("-->SanDiego Producer::topic text can not be read from config.ini<--");
+        sys.exit(1);
+    try:
+        topic = client.topics[str(topictxt).encode()]
+    except(UnknownTopicOrPartition) as e:
+        print("-->SanDiego Producer::this topic not found in the kafka ecosystem<--");
+        sys.exit(1);
 
     print ("~~~~~~~~~~~~~~~Producer SD Started~~~~~~~~~~~~~~~~");
     #creating a synchronus producer by pykafka library.
