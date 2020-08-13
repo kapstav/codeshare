@@ -78,7 +78,21 @@ end; $$
 
 ;
 
-SELECT * FROM public."DesktopWebSearches";
+create or replace procedure testWebSearches(xPATTERN varchar(16),INOUT val varchar(16) DEFAULT null)
+language plpgsql
+as $$
+declare
+val1 int=0;
+val2 int=0;
+begin
+--Querying the number of fresh record created in the database should be 20. (5/producer X 2producer X 2consumer)
+select count(*) INTO val1 from public."CellPhoneWebSearches" Where "MOSTSEARCHED" IN(xPATTERN); 
+select count(*) INTO val2  from public."DesktopWebSearches" Where "MOSTSEARCHED" IN(xPATTERN);
+val= val1+val2;
 
-
-SELECT * FROM public."CellPhoneWebSearches";
+--deleting records for next test session for this pattern
+delete from public."CellPhoneWebSearches" Where "MOSTSEARCHED" IN(xPATTERN);
+delete from public."DesktopWebSearches" Where "MOSTSEARCHED" IN(xPATTERN);
+end; $$
+;
+ 
