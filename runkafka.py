@@ -38,9 +38,11 @@ def runkafka():
                             required=True)
     parser.add_argument('--cert-path', help="Path to the Kafka Certificate Key (obtained from Aiven Console)",
                             required=True)
+    parser.add_argument('--db-cred', required=True, help="Enter DB credential string here")
     parser.add_argument('--producer', action='store_true', default=False, help="Run Kafka producer simulator")
     parser.add_argument('--consumer', action='store_true', default=False, help="Run Kafka consumer simulator")
     parser.add_argument('--testrig', action='store_true', default=False, help="Run Kafka Test Rig, calls both consumer/producer")
+   
 
     args = parser.parse_args()
     validate_args(args)
