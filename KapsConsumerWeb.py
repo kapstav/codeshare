@@ -1,9 +1,11 @@
 import argparse
 from psycopg2.extras import RealDictCursor
+from psycopg2 import OperationalError
 import psycopg2
 from pykafka import KafkaClient, SslConfig
 from configparser import ConfigParser
-from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable
+from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBrokersAvailableError,ConsumerStoppedException, PartitionOwnedError
+import sys 
 
 def KapsConsumerWeb(ca_path, cert_path, key_path):
 
@@ -19,7 +21,11 @@ def KapsConsumerWeb(ca_path, cert_path, key_path):
     db_uri=configP['database']['postgresql_uri']
 
     #connection string using psycopg2 library
-    db_conn = psycopg2.connect(db_uri)
+    try:
+        db_conn = psycopg2.connect(db_uri)
+    except (psycopg2.OperationalError) as e:
+        print("-->Mobile Consumer::Unable to connect to a PostgreSQL Server. Check the service_uri value in config.ini<--");
+        sys.exit(1);
 
     #opening a cursor with dictionary objects as output
     c = db_conn.cursor(cursor_factory=RealDictCursor)
@@ -28,7 +34,11 @@ def KapsConsumerWeb(ca_path, cert_path, key_path):
     configS = SslConfig(cafile=ca_path,certfile=cert_path,keyfile=key_path)   
 
     #creating kafka client with Aiven kafka uri
-    client = KafkaClient(hosts=service_uri,ssl_config=configS);
+    try:
+        client = KafkaClient(hosts=service_uri,ssl_config=configS);
+    except(NoBrokersAvailableError) as e:
+        print("-->SanDiego Producer::Unable to connect to a kafka broker. Check the service_uri value in config.ini<--");
+        sys.exit(1);
 
      #retrieving the topic name from config file viz., KapsTopic
     topictxt=configP['kafka']['topic']

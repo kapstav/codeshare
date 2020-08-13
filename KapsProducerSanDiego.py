@@ -6,7 +6,7 @@ import os
 import sys 
 from pykafka import KafkaClient, SslConfig
 from configparser import ConfigParser
-from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable
+from pykafka.exceptions import SocketDisconnectedError, LeaderNotAvailable, NoBrokersAvailableError,ConsumerStoppedException, PartitionOwnedError
 
 def KapsProducerSanDiego(ca_path, cert_path, key_path, runmode="standard"):
 
@@ -23,13 +23,21 @@ def KapsProducerSanDiego(ca_path, cert_path, key_path, runmode="standard"):
     service_uri=configP['kafka']['service_uri']  
     
     #creating kafka client with Aiven kafka uri
-    client = KafkaClient(hosts=service_uri,ssl_config=configS);
+    try:
+        client = KafkaClient(hosts=service_uri,ssl_config=configS);
+    except(NoBrokersAvailableError) as e:
+        print("-->SanDiego Producer::Unable to connect to a kafka broker. Check the service_uri value in config.ini<--");
+        sys.exit(1);
 
     #random search string collection
-    if(runmode=="test"):    searchtxt=configP['testsearch']['sample']
-    else:   searchtxt=configP['search']['sample']
-    Search_keywords = eval('[' + searchtxt + ']') # e.g. - ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
-    
+    try:
+        if(runmode=="test"):    searchtxt=configP['testsearch']['sample']
+        else:   searchtxt=configP['search']['sample']
+        Search_keywords = eval('[' + searchtxt + ']') # e.g. - ['Floyd','Mail in','Trump', 'Covid', 'Matrix 4', 'China', 'Oxford', 'Reopening']
+    except(KeyError) as e:
+        print("-->SanDiego Producer::Unable to read appropriate section in config.ini<--");
+        sys.exit(1);
+        
      #retrieving the topic name from config file viz., KapsTopic
     topictxt=configP['kafka']['topic']
     topic = client.topics[str(topictxt).encode()]   
@@ -48,7 +56,8 @@ def KapsProducerSanDiego(ca_path, cert_path, key_path, runmode="standard"):
              print(msg)
              try:
                 producer.produce(msg)
-             except (SocketDisconnectedError, LeaderNotAvailable) as e:
+             except (SocketDisconnectedError, LeaderNotAvailable, PartitionOwnedError) as e:
+                print("-->Unable to connect to a kafka broker. Retrying..<--");
                 producer = topic.get_sync_producer()
                 producer.produce(msg)
     print ("~~~~~~~~~~~~~~~Producer SD Finished~~~~~~~~~~~~~~~~");
