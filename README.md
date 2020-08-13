@@ -1,19 +1,22 @@
 # codeshare
 <h2>PyKafka Example</h2>
 This example uses the pyKafka library to interact with Kafka both as a producer of messages and a consumer.
-<h3> Sourcecode download </h3> Download the zip from https://github.com/kapstav/codeshare.git 
-Extract every *.py files in a local windows directory, together with config.ini. Download secrets file and save them in the directory of your choice from Aiven Console. Note the path where you download these files as the links for run time read needs to be provided later.
-<h3>Installing Dependencies</h3>
-        pip install PyKafka
-   <br/>pip install psycopg2
 
-   <br/>The binaries for these is included in the bin folder if your environment can't access them.
-<h3>Running The Example</h3>
+<h3>Subscribing to Kafka Service</h3>
 Go to Aiven Console at to create the kafka service. Use all the defaults, unless you have a need to tweak them. The service will take few minutes to start running.<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig10.jpg"></img>
 You can find the connection details in the "Overview" tab in the Aiven Console for the application we are installing. The service URI generated are usually in the format xxxxx-yyyyy-dd99.aivencloud.com:nnnnn
 
 <h4>Topic Creation:</h4>
 Use the Aiven Client to create a topic in your Kafka cluster (named KapsTopic here, can be changed) <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig9.jpg"></img>
+<h3> Sourcecode download </h3> Download the zip from https://github.com/kapstav/codeshare.git 
+Extract every *.py files (viz., KapsConsumerMobile.py, KapsConsumerWeb.py, KapsProducerSanDiego.py, KapsProducerSanJose.py, TestKafkatoDBStream.py & runkafka.py) in a base local windows directory, together with config.ini. Download secrets file (service.key,service.cert & ca.pem) and save them in the directory of your choice from Aiven Console. Note the path where you download these files as the links for run time read needs to be provided later.
+<h3>Installing Dependencies</h3>
+Make sure you have downloaded the following binaries in the base local windows directory using pip. You might have to preinstall npm, pip and python too. Refer to these product webpages if you need pip & python pre installed before going to next step.
+
+   <br/>pip install PyKafka
+   <br/>pip install psycopg2
+
+   <br/>The binaries for these is included in the bin folder if your environment can't access them.
    <h4>Database integration:</h4> Subscribe for PostgreSQL at Aivent console. This will generate a connection endpoint (ServiceURI) to be used for database crud operations in the defaultdb database. Leave most of the setting parameters for the exercise as default. You should also install some client like PGAdmin 4 to visualize the database query results. <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig11.jpg"></img>
    <br/> Run the following command in a fresh PostgreSQL window which has defaultdb created in public schema using any client of your choice, seek help of a db developer if in confusion.
    <pre>
