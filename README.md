@@ -148,10 +148,15 @@ py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert"
 
  <h3><br/>Kafka Consumer(2): </h3>
  <br/>Will pick only fresh additions to topic
- <br/>Will create a PGSQL compatible insert statement
- <br/>Will insert the record
+ <br/>It commits the consumed records into the database using crtWebSearches. The entries are double, one from Desktop & one from Mobile.
  <br/>Can be made to poll for constant additions to topic. To end do a Ctrl-Z on command prompt. This release we commit in a second and stop the consuming process.
  <br/>There are two consuming end points. One has Mobile Group and another has Web Group marked for easy identification
+ 
+ <h3><br/>TestKafkaToDBStream</h3>
+ <br/>Will act as both a Producer and a Consumer
+ <br/>It commits the consumed records into the database
+ <br/>It invokes a testWebsearches Stored Procedure to validate the counts generated. If count matches a threshold (20), it throws a success
+
 
 <h3>CellPhoneWebSearches(1): </h3>
  <br/>This is a postgreSQL table connected to MobileConsumer created in defaultdb public schema
