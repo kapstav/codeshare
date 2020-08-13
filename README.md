@@ -14,8 +14,8 @@ You can find the connection details in the "Overview" tab in the Aiven Console f
 
 <h4>Topic Creation:</h4>
 Use the Aiven Client to create a topic in your Kafka cluster (named KapsTopic here, can be changed) <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig9.jpg"></img>
-
-   <br/> Run the following command in a fresh PostgreSQL window which has defaultdb created in public schema, seek help of a db developer if in confusion.
+   <h4>Database integration:</h4> Subscribe for PostgreSQL at Aivent console. This will generate a connection endpoint (ServiceURI) to be used for database crud operations in the defaultdb database. Leave most of the setting parameters for the exercise as default. You should also install some client like PGAdmin 4 to visualize the database query results. <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig11.jpg"></img>
+   <br/> Run the following command in a fresh PostgreSQL window which has defaultdb created in public schema using any client of your choice, seek help of a db developer if in confusion.
    <pre>
    -- Table: public.CellPhoneWebSearches
 
@@ -126,7 +126,7 @@ py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert"
 <h4>Test some messages:</h4>
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --testrig
    <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the above path appropriately. Replace the appropriate URI in the service uri parameter too.
-   <h4>Database integration:</h4> Subscribe for PostgreSQL at Aivent console. This will generate a connection endpoint (ServiceURI) to be used for database crud operations in the defaultdb database. Leave most of the setting parameters for the exercise as default. You should also install some client like PGAdmin 4 to visualize the database query results. <img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig11.jpg"></img>
+
 
   <hr/>
   <h2>Component Details</h2>
