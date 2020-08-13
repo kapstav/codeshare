@@ -26,7 +26,7 @@ def KapsProducerSanJose(ca_path, cert_path, key_path, db_cred, runmode="standard
     try:
         client = KafkaClient(hosts=service_uri,ssl_config=configS);
     except(NoBrokersAvailableError) as e:
-        print("-->SanJose Producer::Unable to connect to a kafka broker. Check the service_uri value in config.ini<--");
+        print("-->SanJose Producer::Unable to connect to a kafka broker, or the service is shutdown. Check the service_uri value in config.ini<--");
         sys.exit(1);
 
     #random search string collection

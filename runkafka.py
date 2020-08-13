@@ -10,7 +10,7 @@ from KapsProducerSanDiego import KapsProducerSanDiego
 from KapsProducerSanJose import KapsProducerSanJose
 from KapsConsumerWeb import KapsConsumerWeb
 from KapsConsumerMobile import KapsConsumerMobile
-from TestKafkatoDBStream import TestKafkatoDBStream
+
 
 def validate_args(args):
    for path_option in ("ca_path", "key_path", "cert_path"):
@@ -56,6 +56,7 @@ def runkafka():
         KapsConsumerWeb(**kwargs)
         KapsConsumerMobile(**kwargs)
     elif args.testrig:
+        from TestKafkatoDBStream import TestKafkatoDBStream
         TestKafkatoDBStream(**kwargs)
 
    
