@@ -1,4 +1,4 @@
-#invocation:py runkafka.py --key-path="service.key" --cert-path="service.cert" --ca-path="ca.pem" --service-uri="kapskafka-kapstav-dd56.aivencloud.com:18514" --testrig
+#invocation:py runkafka.py --key-path="./service.key" --cert-path="./service.cert" --ca-path="./ca.pem" --db-cred="avnadmin:mycaz65d9c99lcdc@" --testrig
 import argparse
 import datetime
 import random
