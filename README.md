@@ -120,7 +120,7 @@ end; $$
 </pre>
 <h4>Setup Config.ini:</h4>
 The kafka & pgsql endpoints, topic name and sample seed data are set in config.ini. Open it and update appropriately with your subscriptions gotten from Aiven Console.
-
+<img src="https://raw.githubusercontent.com/kapstav/codeshare/master/img/fig33.jpg"></img>
 <h4>Produce some messages:</h4>
 py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert" --ca-path="./home/ca.pem" --producer
   <br/>Download service.key, service.cert and ca.pem in local drives from Aiven Console on server (say ./home/) and change the path appropriately. Replace the appropriate URI in the service uri parameter too.
@@ -150,18 +150,21 @@ py runkafka.py --key-path="./home/service.key" --cert-path="./home/service.cert"
  <br/>Will pick only fresh additions to topic
  <br/>Will create a PGSQL compatible insert statement
  <br/>Will insert the record
- <br/>Will poll for more additions to topic. To end do a Ctrl-Z on command prompt
- <br/>There are two consuming end points. One has Mobile and another has Web marked for easy identification
+ <br/>Can be made to poll for constant additions to topic. To end do a Ctrl-Z on command prompt. This release we commit in a second and stop the consuming process.
+ <br/>There are two consuming end points. One has Mobile Group and another has Web Group marked for easy identification
 
 <h3>CellPhoneWebSearches(1): </h3>
  <br/>This is a postgreSQL table connected to MobileConsumer created in defaultdb public schema
 
 <h3>DesktopWebSearches(1): </h3>
  <br/>This is a postgreSQL table connected to DesktopConsumer created in defaultdb public schema
-<h3>crtWebSearches(1): </h3>
- <br/>This is a postgreSQL stored procedure invoked by consumers.
-
  
+<h3>crtWebSearches(1): </h3>
+ <br/>This is a postgreSQL stored procedure invoked by consumers to populate the above two tables.
+
+
+<h3>testWebSearches(1): </h3>
+ <br/>This is a postgreSQL stored procedure invoked by consumers to create test records and do validation with the number of records created.
 
 <h3>Screenshots:</h3>
 <h4>Sample Producer run</h4>
